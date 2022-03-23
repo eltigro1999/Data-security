@@ -63,9 +63,21 @@ void Coder::WriteNumbersIntoFile(const std::vector<int>& Numbers, std::ofstream&
 }
 
 void Coder::Encode(const std::string& filename) {
+	if (Encoded) {
+		std::cout << "File has already been encoded." << std::endl;
+		return;
+	}
+	Encoded = true;
+	Decoded = false;
 	SubstituteBytes(filename, encodingKey);
 }
 void Coder::Decode(const std::string& filename) {
+	if (Decoded) {
+		std::cout << "File has already been decoded." << std::endl;
+		return;
+	}
+	Encoded = false;
+	Decoded = true;
 	SubstituteBytes(filename, decodingKey);
 }
 
