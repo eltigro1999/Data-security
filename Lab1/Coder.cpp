@@ -16,6 +16,17 @@ Coder::Coder() {
 	if (!KeyFile) {
 		GenerateKey();
 	}
+	else {
+		std::vector<int> EncodingNumbers;
+		std::vector<int> DecodingNumbers;
+		ReadExistingKey(KeyFile, EncodingNumbers);
+		ReadExistingKey(KeyFile, DecodingNumbers);
+		for (int i = 0; i < EncodingNumbers.size(); ++i) {
+			encodingKey[EncodingNumbers[i]] = DecodingNumbers[i];
+			decodingKey[DecodingNumbers[i]] = EncodingNumbers[i];
+		}
+	}
+	KeyFile.close();
 }
 
 void Coder::GenerateKey() {
@@ -82,4 +93,11 @@ void Coder::SubstituteBytes(const std::string& filename, const std::map<unsigned
 		}
 		std::rename(CipheredfileName.c_str(), filename.c_str());
 	}
+}
+
+void Coder::ReadExistingKey(std::ifstream& KeyFile, std::vector<int>& Numbers) {
+	std::string strNumbers;
+	std::getline(KeyFile, strNumbers);
+	std::stringstream stream(strNumbers);
+	Numbers.assign(std::istream_iterator<int>(stream), std::istream_iterator<int>());
 }

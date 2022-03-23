@@ -11,6 +11,7 @@ class Coder {
 	void WriteNumbersIntoFile(const std::vector<int>&, std::ofstream&);
 	void GenerateKey();
 	void SubstituteBytes(const std::string& filename, const std::map<unsigned char, unsigned char>& Key);
+	void ReadExistingKey(std::ifstream& KeyFile, std::vector<int>& Numbers);
 public:
 	Coder();
 	void Encode(const std::string& filename);
