@@ -87,7 +87,7 @@ uint64_t BlowFish::F(const uint64_t& subBlock) {
 
 uint64_t BlowFish::bits32FromPos(const uint64_t& Position, const std::string& str) {
 	uint64_t _32bits = 0;
-	for (int i = Position; i < Position + 4; ++i) {
+	for (int i = Position, counter=0; counter<4; i=(i+1)%str.size(), ++counter) {
 		unsigned char c = (unsigned char)str[i];
 		_32bits = _32bits << 8 | (unsigned char)str[i];
 	}
